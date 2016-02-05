@@ -1,0 +1,7 @@
+{
+  "name":"tox-wbc-mgr-api",
+  "description":"API of WBC manager based on node.js, express, mongodb ...",
+  "scripts":{},
+  "env":{},
+  "addons":[]
+}
