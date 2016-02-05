@@ -1,0 +1,19 @@
+{
+  "name": "tox-wbc-mgr-api",
+  "version": "0.0.1",
+  "description": "API of WBC manager based on node.js, express, mongodb ...",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dasrick/tox-wbc-mgr-api.git"
+  },
+  "author": "Enrico Hoffmann <dasrick@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dasrick/tox-wbc-mgr-api/issues"
+  },
+  "homepage": "https://github.com/dasrick/tox-wbc-mgr-api#readme"
+}
