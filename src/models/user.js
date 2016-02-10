@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var ModelSchema = new Schema({
   'name': {type: String, default: '', trim: true, required: true},
   'customer': {type: Schema.ObjectId, ref: 'Customer', required: true},
-  'permissions': [{type: Schema.ObjectId, ref: 'Permission'}]
+  'email': {type: String, default: '', trim: true, required: true}
 });
 
-module.exports = mongoose.model('Policy', ModelSchema);
+module.exports = mongoose.model('User', ModelSchema);

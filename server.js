@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var app = express();
+var restify = require('express-restify-mongoose');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // config env stuff
@@ -46,19 +47,44 @@ function connect() {
 var router = express.Router();
 // ---------------------------------------------------------------------------------------------------------------------
 // middleware to use for all requests
-router.use(function (req, res, next) {
-  // do logging
-  console.log('something is going on...');
-  next();
+//router.use(function (req, res, next) {
+//  // do logging
+//  console.log('something is going on...');
+//  next();
+//});
+//// ---------------------------------------------------------------------------------------------------------------------
+//// test route to make sure everything is working (accessed at GET http://localhost:6080/api)
+//router.get('/', function (req, res) {
+//  res.json({message: 'yeah! welcome to api of WBC-MGR!'});
+//});
+//// ---------------------------------------------------------------------------------------------------------------------
+//// register routes
+//app.use('/api', router);
+
+
+// setup restify
+restify.defaults({
+  prefix: '/api',
+  version: '/v1',
+  totalCountHeader: true
 });
-// ---------------------------------------------------------------------------------------------------------------------
-// test route to make sure everything is working (accessed at GET http://localhost:6080/api)
-router.get('/', function (req, res) {
-  res.json({message: 'yeah! welcome to api of WBC-MGR!'});
-});
-// ---------------------------------------------------------------------------------------------------------------------
-// register routes
-app.use('/api', router);
+
+
+// import and use models
+restify.serve(router, require('./src/models/customer'));
+restify.serve(router, require('./src/models/datamineruser'));
+restify.serve(router, require('./src/models/group'));
+restify.serve(router, require('./src/models/permission'));
+restify.serve(router, require('./src/models/policy'));
+restify.serve(router, require('./src/models/presentation'));
+restify.serve(router, require('./src/models/question'));
+restify.serve(router, require('./src/models/role'));
+restify.serve(router, require('./src/models/slide'));
+restify.serve(router, require('./src/models/user'));
+restify.serve(router, require('./src/models/videomanager'));
+restify.serve(router, require('./src/models/webcast'));
+
+app.use(router);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // START SERVER
