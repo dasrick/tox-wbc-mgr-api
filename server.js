@@ -38,6 +38,7 @@ function connect() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MODELS
 // ---------------------------------------------------------------------------------------------------------------------
+require('./src/models/policy');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ROUTES
@@ -46,29 +47,26 @@ function connect() {
 var router = express.Router();
 // ---------------------------------------------------------------------------------------------------------------------
 // middleware to use for all requests
-router.use(function (req, res, next) {
-  // do logging
-  console.log('something is going on...');
-  next();
-});
+//router.use(function (req, res, next) {
+//  // do logging
+//  console.log('something is going on...');
+//  next();
+//});
 // ---------------------------------------------------------------------------------------------------------------------
 // test route to make sure everything is working (accessed at GET http://localhost:6080/api)
-router.get('/', function (req, res) {
-  res.json({message: 'yeah! welcome to api of WBC-MGR!'});
-});
+//router.get('/', function (req, res) {
+//  res.json({message: 'yeah! welcome to api of WBC-MGR!'});
+//});
 // ---------------------------------------------------------------------------------------------------------------------
 // register routes
-app.use('/api', router);
+require('./src/routes/policy')(app, router);
+require('./src/routes/group')(app, router);
+
+//app.use('/api/policy', require('./src/routes/policy'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // START SERVER
 // ---------------------------------------------------------------------------------------------------------------------
-//app.listen(app.get('port'), function () {
-//  console.log('Node app of WBC-API running ...');
-//  console.log('Host: localhost:' + app.get('port'));
-//  console.log('Env: ', process.env.NODE_ENV);
-//});
-
 connect()
   .on('error', console.log)
   .on('disconnected', connect)
